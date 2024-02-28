@@ -1,0 +1,13 @@
+<div class="container">
+  <%= simple_form_for @pokemon, html: { data: { controller: "load-image" } } do |f| %>
+    <%= f.input :name %>
+    <%= f.input :types, collection: Pokemon::TYPES, input_html: {multiple: true, data: {controller: "tom-select", tom_select_options_value: {tags: true, plugins: ['remove_button']}}} %>
+    <!-- <%# f.input :poster_url %> -->
+
+    <%# Image tag get filled by the controller load-image %>
+    <%= image_tag "", data: {load_image_target: "image" } %>
+    <%= f.input :photo, as: :file, input_html: { data: { action: 'change->load-image#displayImage' } } %>
+    <%= f.input :price_per_day %>
+    <%= f.submit %>
+  <% end %>
+</div>
